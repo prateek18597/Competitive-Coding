@@ -21,7 +21,8 @@ public class Main
 					p[j]=a[j]+p[j-1];
 				}
  		}
- 			long nx[]=new long[m];
+ 		
+			long nx[]=new long[m];
  			long ans[]=new long[m];
 			long min=0;
 			long pos=m-1;
