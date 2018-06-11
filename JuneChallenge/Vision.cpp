@@ -15,13 +15,31 @@ int main()
 		double qx,qy,qz;
 		double dx,dy,dz;
 		double cx,cy,cz,r;
-		
+			
+		double pcx,pcy,pcz;
+		double pcxy,pcxz,pcyz;
+		double qpx,qpy,qpz;
+
 		cin>>px>>py>>pz;
 		cin>>qx>>qy>>qz;
 		cin>>dx>>dy>>dz;
 		cin>>cx>>cy>>cz>>r;
 		
-		double x,y;
+		pcx=px-cx;
+		pcy=py-cy;
+		pcz=pz-cz;
+		
+		pcxy=pcx+pcy;
+		pcyz=pcz+pcy;
+		pcxz=pcx+pcz;
+
+		qpx=qx-px;
+		qpy=qy-py;
+		qpz=qz-pz;
+
+		if(pz==0 && qz!=0 && dz==0 && cz==0)
+		{
+			double x,y;
 		x=px-cx;//x=3
 		y=py-cy;//y=3
 		// cout<<"x "<<x<<endl;
@@ -77,6 +95,26 @@ int main()
 
 			cout<<tt<<endl;
 		}
+		}
+		else
+		{
+			double A=(pcyz-r*r)*dx*dx+(pcxz-r*r)*dy*dy+(pcxy-r*r)*dz*dz-pcxy*dx*dy-pcxz*dx*dz-pcyz*dy*dz;
+			double B=2*(pcyz-r*r)*dx*qpx+2*(pcxz-r*r)*dy*qpy+2*(pcxy-r*r)*dz*qpz-pcxy*(dx*qpy+dy*qpx)-pcxz*(dx*qpz+dz*qpx)-pcyz*(dy*qpz+dz*qpy);
+			double C=(pcyz-r*r)*qpx*qpx+(pcxz-r*r)*qpy*qpy+(pcxy-r*r)*qpz*qpz-pcxy*qpx*qpy-pcyz*qpy*qpz-pcxz*qpx*qpz;
+			// cout<< "A "<<A<<endl;
+			// cout<< "B "<<B<<endl;
+			// cout<< "A "<<C<<endl;"<<A<<endl;
+			// cout<< "B "<<B<<endl;
+			// cout<< "A 
+			double t31,t32;
+
+			t31=(-B+sqrt(B*B-4*A*C))/(2.0*A);
+			t32=(-B-sqrt(B*B-4*A*C))/(2.0*A);
+			cout<<t31<<endl<<t32;
+
+
+		}
+		
 		
 	}
 	return 0;
