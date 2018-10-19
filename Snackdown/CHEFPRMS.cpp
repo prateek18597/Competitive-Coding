@@ -14,6 +14,8 @@ bool isPrime(int n)
     return true; 
 }
 
+
+
 int main()
 {
 	int T;
@@ -22,5 +24,6 @@ int main()
 	{
 		int N;
 		cin>>N;
+
 	}
 }
