@@ -7,8 +7,7 @@ int main()
 	cin>>T;
 	for(int i=0;i<T;i++)
 	{
-		long long int N,M,L;
-		long long int K;
+		long long int N,M,L,K;
 		cin>>N>>M>>K>>L;
 		long long int A[N];
 		for(int j=0;j<N;j++)
