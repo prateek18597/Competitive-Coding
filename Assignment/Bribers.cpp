@@ -9,10 +9,22 @@ long long int getFirstMismatch(long long int a[],long long int n)
 {
 
     long long int kk=-1;
-    for(long long int i=1;i<=n;i++)
+    for(long long int i=n;i>=1;i--)
     {
-        if(a[i]>i)
+        if(a[i]>i){
             kk=i;
+            break;
+        }
+    }
+    if(kk==-1)
+    {
+        for(long long int i=n;i>=1;i--)
+        {
+            if(a[i]<i){
+                kk=i;
+                break;
+            }
+        }   
     }
     return kk;
 }
@@ -32,9 +44,9 @@ int main() {
             cin>>a[j];
         }
         long long int count=0;
-        for(long int j=1;j<=n;)
+        for(long int j=n;j>=1;)
         {
-            j=getFirstMismatch(a,n);
+            j=getFirstMismatch(a,j);
             if(j==-1)
                 break;
                 if(a[j]==j+1)

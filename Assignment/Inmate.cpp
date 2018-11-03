@@ -5,6 +5,7 @@ int main()
 {
 	long long int T;
 	cin>>T;
+	
 	for(long long int k=0;k<T;k++)
 	{
 		long long int N;
@@ -12,18 +13,23 @@ int main()
 		cin>>N>>C;
 		long long int A[N];
 		long long int B[N];
+	
 		for(long long int i=0;i<N;i++)
 		{
 			cin>>A[i];
 		}
+	
 		sort(A,A+N);
+	
 		for(long long int i=0;i<N;i++)
 		{
 			B[i]=A[i]-A[0];
 		}
+	
 		long long int max=0;
-		long long int ii=1;
-		for(long long int i=B[1];i<=B[N-1];i=B[ii])
+		long long int ii=0;
+	
+		for(long long int i=1;i<=B[N-1];i++)
 		{
 			ii++;
 			long long int last=0;
