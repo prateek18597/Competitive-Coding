@@ -18,7 +18,7 @@ int main()
 	long long int n,m,k;
 	cin>>n>>m>>k;
 	
-	int B[n+1]={0};//Using this to denote set number of each vertex
+	long long int B[n+1]={0};//Using this to denote set number of each vertex
 	
 	for(long long int i=1;i<=n;i++)
 	{
@@ -31,11 +31,14 @@ int main()
 	{
 		cin>>e[i].start>>e[i].end>>e[i].cost;
 	}
+
 	sort(e,e+m,comparator);	
+	
 	long long int cost=0;
 	long long int ans1=0;
 	long long int aa=0;
-	for(int i=0;i<m;i++)
+	
+	for(long long int i=0;i<m;i++)
 	{
 		if(B[e[i].start]!=B[e[i].end])
 		{
