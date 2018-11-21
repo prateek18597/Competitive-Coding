@@ -5,7 +5,8 @@ int main()
 {
 	long long int N,Q,K;
 	cin>>N>>Q>>K;
-	int A[N];
+	long long int A[N];
+	long long int B[N]={-1};
 	long long int max=0;
 	long long int largest=max;
 	cin>>A[0];
@@ -70,32 +71,15 @@ int main()
 			}
 			
 			long long int co=count%N;
-			for(long long int j=0;j<=co-1;j++)
+			if(B[co]!=-1)
 			{
-				if(A[N-co+j]==0)
-				{
-					max=0;
-				}
-				else
-				{
-					max++;
-					if(max>largest)
-					{
-						largest=max;
-						if(largest>=K)
-						{
-							largest=K;
-							break;
-						}
-					}
-				}
+				largest=B[co];
 			}
-
-			if(largest<K)
-			{
-				for(long long int j=0;j<=N-1-co;j++)
+			else
+			{	
+				for(long long int j=0;j<=co-1;j++)
 				{
-					if(A[j]==0)
+					if(A[N-co+j]==0)
 					{
 						max=0;
 					}
@@ -108,12 +92,39 @@ int main()
 							if(largest>=K)
 							{
 								largest=K;
+								B[co]=largest;
 								break;
 							}
 						}
 					}
-				}			
+				}
+
+				if(largest<K)
+				{
+					for(long long int j=0;j<=N-1-co;j++)
+					{
+						if(A[j]==0)
+						{
+							max=0;
+						}
+						else
+						{
+							max++;
+							if(max>largest)
+							{
+								largest=max;
+								if(largest>=K)
+								{
+									largest=K;
+									B[co]=largest;
+									break;
+								}
+							}
+						}
+					}			
+				}
 			}
+
 		}
 	}
 	return 0;
