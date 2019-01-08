@@ -41,7 +41,14 @@ int main()
 			}
 			else
 			{
-				if()
+				if(countBob==countAlice && countBoth!=0)
+				{
+					cout<<"BOB"<<endl;
+				}
+				else
+				{
+					cout<<"ALICE"<<endl;	
+				}
 			}
 		}
 	}
