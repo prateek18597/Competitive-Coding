@@ -1,32 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int getNumber(bool b[4])
-{
-	for(int i=0;i<4;i++)
-	{
-		if(b[i]==false)
-		{
-			return i;
-		}
-	}
-	return -1;
-}
-
-int getNumber1(bool b[4])
-{
-	for(int i=3;i>-1;i--)
-	{
-		if(b[i]==false)
-		{
-			return i;
-		}
-	}
-	return -1;
-}
-
-
-
 int main()
 {
 	long long int T;
@@ -35,6 +9,8 @@ int main()
 	{
 		long long int N,M;
 		cin>>N>>M;
+		long long int X[2][6]={{1,1,2,2,3,3},{2,3,3,1,1,2}};
+		long long int Y[8][8]={{1,1,2,2,3,3},{2,3,3,1,1,2}};
 		long long int A[N][M];
 		for(int j=0;j<N;j++)
 		{
@@ -44,122 +20,257 @@ int main()
 			}
 		}
 		int count=1;
-		long long int max=N>M?N:M;
+		long long int max=4;
 		
-		if(N+M>5)
+		if((N==1 && M==1) || (N==1 && M==2) || (N==2 && M==1))
 		{
-			max=4;
+			max=1;
 		}
-
-		for(long long int x=0;x<N;x++)
+		else
 		{
-			for(long long int y=0;y<M;y++)
+			if((N==1 && M!=1) || (N!=1 && M==1) || (N==2 && M==2))
 			{
-				int B[4]={0,0,0,0};
-				bool b[4]={false,false,false,false};
-				int c[4]={0,0,0,0};
-				if(A[x][y]==0)
-					A[x][y]=1;
-
-				if(x-1>=0)
+				max=2;
+			}
+			else
+			{
+				if(N>=3 && M>=3)
 				{
-					B[0]=A[x-1][y];
-					if(B[0]!=0)
-					{
-						b[B[0]-1]=true;
-						c[B[0]-1]++;
-					}
+					max=4;
 				}
-				if(y-1>=0)
+				else
 				{
-					B[1]=A[x][y-1];	
-					if(B[1]!=0)
-					{
-						b[B[1]-1]=true;
-						c[B[1]-1]++;
-					}
+					max=3;
 				}
-				bool flag=false;
-				if(x+1<N)
-				{
-					B[2]=A[x+1][y];
-					if(B[2]!=0 && b[B[2]-1]==true)
-					{	
-						A[x+1][y]=getNumber1(b)+1;
-						flag=true;
-					}
-					else
-					{
-						if(B[2]!=0)
-						{
-							b[B[2]-1]=true;
-							c[B[2]-1]++;
-						}
-					}
-					
-				}
-				bool flag1=false;
-				if(y+1<M)
-				{
-					B[3]=A[x][y+1];
-					if(B[3]!=0 && b[B[3]-1]==true)
-					{	
-						A[x][y+1]=getNumber1(b)+1;
-						B[3]=A[x][y+1];
-						b[B[3]-1]=true;
-						flag1=true;
-					}
-					else
-					{
-						if(B[3]!=0)
-						{
-							b[B[3]-1]=true;
-							c[B[3]-1]++;
-						}
-					}
-				}
-
-				int temp=getNumber(b);
-				if(temp!=-1)
-				{
-					
-					if(y+1<M && flag1==false && A[x][y+1]==0)
-					{
-						A[x][y+1]=temp+1;
-						b[temp]=true;
-						temp=getNumber(b);
-					}
-					
-						
-					if(temp!=-1 && x+1<N && flag==false)
-					{
-						A[x+1][y]=temp+1;
-						b[temp]=true;
-					}
-				}
-
-				for(int j=0;j<N;j++)
-				{
-					for(int k=0;k<M;k++)
-					{
-						cout<<A[j][k]<<" ";
-					}
-					cout<<endl;
-				}
-				cout<<"^^^^^^^^^^^^^^^^^"<<endl;
-
-				B[0]=0;B[1]=0;B[2]=0;B[3]=0;
-				b[0]=false;b[1]=false;b[2]=false;b[3]=false;
 			}
 		}
 		cout<<max<<endl;
-		for(int j=0;j<N;j++)
+		if(max==1)
 		{
-			for(int k=0;k<M;k++)
+			if(N==1 && M==1)
+			cout<<1<<endl;
+			else
 			{
-				cout<<A[j][k]<<" ";
+				if(N==1)
+				{
+					cout<<1<<" "<<1<<endl;
+				}
+				else
+				{
+					cout<<1<<endl<<1<<endl;
+				}
 			}
-			cout<<endl;
+		}
+		else
+		{
+			if(max==2)
+			{
+				if(N==2 && M==2)
+				cout<<"1 1\n2 2"<<endl;
+				else
+				{
+					if(N==1)
+					{
+						int start=1;
+						int count=0;
+						for(int j=0;j<M;j++)
+						{
+							cout<<start<<" ";
+							count++;
+							if(count==2)
+							{
+								if(start==1)
+								{
+									start++;
+								}
+								else
+								{
+									start--;
+								}
+								count=0;
+							}
+						}
+						cout<<endl;
+					}
+					else
+					{
+						int start=1;
+						int count=0;
+						for(int j=0;j<N;j++)
+						{
+							cout<<start<<endl;
+							count++;
+							if(count==2)
+							{
+								if(start==1)
+								{
+									start++;
+								}
+								else
+								{
+									start--;
+								}
+								count=0;
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				if(max==3)
+				{
+					if(N==2)
+					{
+						for(int j=0;j<N;j++)
+						{
+							if(j%2==0)
+							{
+								for(int k=0;k<M;k++)
+								{
+									if(k%6<=1)
+									{
+										cout<<1<<" ";
+									}
+									else
+									{
+										if(k%6<=3)
+										{
+											cout<<2<<" ";
+										}
+										else
+										{
+											cout<<3<<" ";
+										}
+									}
+								}			
+							}
+							else
+							{
+								for(int k=0;k<M;k++)
+								{
+									if(k%6==0 || k%6==5)
+									{
+										cout<<2<<" ";
+									}
+									else
+									{
+										if(k%6<=2)
+										{
+											cout<<3<<" ";
+										}
+										else
+										{
+											cout<<1<<" ";
+										}
+									}
+								}
+							}
+							cout<<endl;
+						}	
+					}
+					else
+					{
+						for(int j=0;j<N;j++)
+						{
+							int row;int column;
+							switch(j%6)
+							{
+								case 0:
+								case 1:row=1;
+								break;
+								case 2:
+								case 3:row=2;
+								break;
+								case 4:
+								case 5:row=3;
+								break;
+
+							}
+							switch(j%6)
+							{
+								case 0:
+								case 5:column=2;
+								break;
+								case 2:
+								case 1:column=3;
+								break;
+								case 4:
+								case 3:column=1;
+								break;
+
+							}
+							cout<<row<<" "<<column<<endl;
+						}	
+					}
+					
+				}
+				else
+				{
+					for(int j=0;j<N;j++)
+					{
+						if(j%2==0)
+						{
+							int start=(j%8)/2;
+							start++;
+							int count=0;
+							for(int k=0;k<M;k++)
+							{
+								cout<<start<<" ";
+								count++;
+								if(count==2)
+								{
+									count=0;
+									start++;
+									if(start==5)
+									{
+										start=1;
+									}
+								}
+							}
+							cout<<endl;
+						}
+						else
+						{
+							int start;
+							switch(j%8)
+							{
+								case 1:
+									start=3;
+								break;
+								case 3:
+									start=4;
+								break;
+								case 5:
+								start=1;
+								break;
+								case 7:
+								start=2;
+								break;
+							}
+							cout<<start<<" ";
+							int count=0;
+							start++;
+							if(start==5)
+								start=1;
+							for(int k=1;k<M;k++)
+							{
+								cout<<start<<" ";
+								count++;
+								if(count==2)
+								{
+									count=0;
+									start++;
+									if(start==5)
+										start=1;
+								}
+							}
+							cout<<endl;
+
+						}
+					}
+				}
+			}
 		}
 	}
 	return 0;

@@ -7,8 +7,8 @@ typedef vector<ll> vll;
 
 ll _sieve_size;
 bitset<10000010> bs;
-vll primes;         
-
+vll primes;   
+vll first;      
 void sieve(ll upperbound) 
 {         
   _sieve_size = upperbound+1;
@@ -19,9 +19,19 @@ void sieve(ll upperbound)
 	{
     
     for (ll j = i*i; j < _sieve_size; j += i) bs[j] = 0;
-    primes.push_back(i);
-    count++;
-    if(count==50000)
+    if(i==3 || i==5 || i==7||i==11 || i==13 ||i==17 || i==19 ||i==23 || i==29 ||i==31)
+    {
+    	first.push_back(i);
+    }
+    else
+    {
+    	if(i!=2)
+    	{
+    		primes.push_back(i);
+    		count++;
+    	}
+    }
+    if(count==5000)
      break;
 }
 }        
@@ -30,7 +40,8 @@ int main()
 {
 	int T;
 	cin>>T;
-	sieve(1000000);
+	sieve(100000);
+	// bool debug[1000000]={false};
 	long long int Q[T];
 	long long int max=0;
 	for(int i=0;i<T;i++)
@@ -40,12 +51,25 @@ int main()
 
 	for(long long int i=0;i<T;i++)
 	{
+		long long int xx[Q[i]];
 		for(long long int j=0;j<Q[i];j++)
 		{
-			unsigned long long int qkq=primes.at(j)*primes.at((j+1)%Q[i]);
-			cout<<qkq<<" ";
+			long long int a1=primes.at(j%5000);
+			if(j%5000==0)
+			{
+				a1*=2;
+			}
+			if(j==Q[i]-1)
+			{
+				a1*=2;
+			}
+			int k=(j+j/5000)%10;
+			a1*=first.at(k);
+			if(j!=0 && j!=Q[i]-1)
+				a1*=first.at((j-1+j/5000)%10);
+			xx[j]=a1;
+			cout<<a1<<" ";
 		}	
-		
 		cout<<endl;
 	}
 }
