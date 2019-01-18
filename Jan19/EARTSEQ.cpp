@@ -55,7 +55,7 @@ int main()
 		for(long long int j=0;j<Q[i];j++)
 		{
 			long long int a1=primes.at(j%5000);
-			if(j%5000==0)
+			if(j%5000)
 			{
 				a1*=2;
 			}
